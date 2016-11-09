@@ -13,7 +13,7 @@ class Histogram:
 		for word in wordList:
 			if word:
 				if word in self.words:
-					self.words[word]+=1
+					self.words[word]=self.words[word]+1
 				else:
 					self.words[word]=1;
 	
@@ -24,10 +24,13 @@ class Histogram:
 		self.addList(wordList)
 	
 	def addFile(self, filename):
-		self.addString(open('/usr/share/dict/words', 'r').read())
+		self.addString(open(filename).read())
 	
 	def getFrequency(self, word):
-		return self.words[word]
+		if word in self.words:
+			return self.words[word]
+		else:
+			return 0
 
 def run():
 	hist=Histogram()
@@ -36,7 +39,7 @@ def run():
 	else:
 		hist.addFile(sys.argv[1])
 		print("'" + sys.argv[2] + "' appears " + str(hist.getFrequency(sys.argv[2])) + " times")
-		print(hist.words)
+		#print(hist.words)
 	
 
 if __name__ == '__main__':
