@@ -20,28 +20,30 @@ class RandomWordSelector:
 	
 	def appendWord(self, text, freq):
 		self.words.append(WordEntry(text, freq, self.maxScore))
-		self.maxScore+=freq
+		self.maxScore=self.maxScore+freq
 		
 	def __init__(self, hist):
 		
-		self.appendWord("cat", 1)
-		self.appendWord("dog", 1)
-		self.appendWord("mouse", 1)
+		for key, val in hist.words.iteritems():
+			self.appendWord(key, val)
 		
 		if self.maxScore==0:
 			self.appendWord("no_words", 1)
-		
-		print()
 	
 	def getWordAtPos(self, pos):
-		i=0
-		while(i<len(self.words) and not(self.words[i].pos>=pos and pos<self.words[i].freq+self.words[i].pos)):
-			i+=1
 		
-		if len(self.words)<=i:
-			return "indexOutOfRange"
-		else:
-			return self.words[i].text
+		if pos>self.maxScore:
+			return "scoreSentTooHigh"
+		
+		i=0
+		
+		while True:
+			if i>len(self.words):
+				return "indexOutOfRange"
+			
+			if pos>=self.words[i].pos and pos<self.words[i].pos+self.words[i].freq:
+				return self.words[i].text
+			i+=1
 	
 	def getRandWord(self):
 		pos=randint(0, self.maxScore-1)
@@ -49,8 +51,9 @@ class RandomWordSelector:
 	
 	def toString(self):
 		out=""
-		for i in words:
+		for i in self.words:
 			out+=i.text+": "+str(i.freq)+", "+str(i.pos)+"\n"
+		return out
 	
 def run():
 	hist=Histogram()
@@ -59,8 +62,6 @@ def run():
 	else:
 		hist.addFile(sys.argv[1])
 		selector=RandomWordSelector(hist)
-		
-		print(selector.toString())
 		
 		for i in range(0, int(sys.argv[2])):
 			print(selector.getRandWord())
