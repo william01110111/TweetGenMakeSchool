@@ -12,11 +12,20 @@ selector=RandomWordSelector(hist)
 
 @app.route('/')
 def welcome():
-	return "welcome to random word selector, go to /random_word to get a word"
+	return "welcome to random word selector, go to /word to get a word"
 
-@app.route('/random_word')
+@app.route('/word')
 def getRandWord():
 	return selector.getRandWord()
+
+@app.route('/words/<wordNum>')
+def getManyWords(wordNum):
+	wordList=[]
+	
+	for i in range(0, int(wordNum)):
+		wordList.append(selector.getRandWord())
+	
+	return " ".join(wordList)
 
 if __name__ == "__main__":
 	port= int(os.environ.get("PORT", 5000))

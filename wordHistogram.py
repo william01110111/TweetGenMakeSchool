@@ -18,7 +18,7 @@ class Histogram:
 					self.words[word]=1;
 	
 	def addString(self, text):
-		delimiters = " ", ",", ".", "\n", "\t", ";"
+		delimiters = " ", ",", ".", "\n", "\t", ";", "?", "!"
 		regexPattern = '|'.join(map(re.escape, delimiters))
 		wordList=re.split(regexPattern, text)
 		self.addList(wordList)
