@@ -1,3 +1,5 @@
+from wordHistogram import Histogram
+from randomWordSelector import RandomWordSelector
 
 from flask import Flask
 app = Flask(__name__)
