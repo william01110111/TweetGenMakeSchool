@@ -9,8 +9,14 @@ hist=Histogram()
 hist.addFile("trump_speach.txt")
 selector=RandomWordSelector(hist)
 
+@app.route('/')
+def welcome():
+	return "welcome to random word selector, go to /random_word to get a word"
+
 @app.route('/random_word')
-def hello_world():
-    return selector.getRandWord()
-    
-    
+def getRandWord():
+	return selector.getRandWord()
+
+if __name__ == "__main__":
+    app.run()
+
