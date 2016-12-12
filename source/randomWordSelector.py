@@ -23,7 +23,7 @@ class RandomWordSelector:
 		
 	def __init__(self, hist):
 		
-		for key, val in hist.words.iteritems():
+		for key, val in hist.iteritems():
 			self.appendWord(key, val)
 		
 		#self.appendWord("1", 1)
@@ -97,7 +97,7 @@ def run():
 		print("too few args")
 	else:
 		hist.addFile(sys.argv[1])
-		selector=RandomWordSelector(hist)
+		selector=RandomWordSelector(hist.words)
 		
 		#print(selector.toString())
 		
