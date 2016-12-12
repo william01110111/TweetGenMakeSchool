@@ -38,6 +38,13 @@ class MarkovModel:
 		print("found "+str(len(quotes))+" quotes")
 		addList(quotes)
 	
+	def getString(self):
+		out=""
+		out+="[begin]"+self.begin.getString()+"\n"
+		for key, val in self.words.iteritems():
+			out+=val.getString()+"\n"
+		return out
+	
 	def makeQuote(self):
 		text=""
 		node=self.begin.getRandomNext()
@@ -61,6 +68,8 @@ if __name__=="__main__":
 	model=MarkovModel()
 	model.addList([["one", "two", "one", "three"]])
 	#model.addFile("../../DW_scraper/allDoctorQuotes.txt")
+	
+	print("\nmodel:\n"+model.getString())
 	
 	print("randomly generated quote:\n")
 	

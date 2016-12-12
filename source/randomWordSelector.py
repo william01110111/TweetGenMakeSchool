@@ -4,8 +4,6 @@ from random import randint
 import sys
 
 class WordEntry:
-	text=None
-	pos=None
 	
 	def __init__(self, text, pos):
 		self.text=text
@@ -14,10 +12,9 @@ class WordEntry:
 
 class RandomWordSelector:
 	
-	words=[]
-	maxScore=0
-	
 	def appendWord(self, text, freq):
+		self.words=[]
+		self.maxScore=0
 		self.words.append(WordEntry(text, self.maxScore))
 		self.maxScore=self.maxScore+freq
 		
@@ -83,7 +80,9 @@ class RandomWordSelector:
 	
 	def getRandWord(self):
 		pos=randint(0, self.maxScore-1)
-		return self.getWordAtPos(pos)
+		out=self.getWordAtPos(pos)
+		#print("\n"+out.getString())
+		return out
 	
 	def toString(self):
 		out=""
