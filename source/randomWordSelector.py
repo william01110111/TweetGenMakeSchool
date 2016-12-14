@@ -1,6 +1,6 @@
 
 from wordHistogram import Histogram
-from random import randint
+import random
 import sys
 
 class WordEntry:
@@ -11,24 +11,21 @@ class WordEntry:
 		
 
 class RandomWordSelector:
-	
-	def appendWord(self, text, freq):
-		self.words=[]
-		self.maxScore=0
-		self.words.append(WordEntry(text, self.maxScore))
-		self.maxScore=self.maxScore+freq
 		
 	def __init__(self, hist):
+		
+		self.words=[]
+		self.maxScore=0
 		
 		for key, val in hist.iteritems():
 			self.appendWord(key, val)
 		
-		#self.appendWord("1", 1)
-		#self.appendWord("44", 4)
-		#self.appendWord("999", 9)
-		
 		if self.maxScore==0:
 			self.appendWord("no_words", 1)
+	
+	def appendWord(self, text, freq):
+		self.words.append(WordEntry(text, self.maxScore))
+		self.maxScore=self.maxScore+freq
 	
 	def getWordAtPosLinear(self, pos):
 		
@@ -79,7 +76,7 @@ class RandomWordSelector:
 		#return linearResult
 	
 	def getRandWord(self):
-		pos=randint(0, self.maxScore-1)
+		pos=random.randrange(0, self.maxScore)
 		out=self.getWordAtPos(pos)
 		#print("\n"+out.getString())
 		return out

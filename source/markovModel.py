@@ -36,7 +36,7 @@ class MarkovModel:
 		print("tokenizing...")
 		quotes=tokenizer.tokenize(contents)
 		print("found "+str(len(quotes))+" quotes")
-		addList(quotes)
+		self.addList(quotes)
 	
 	def getString(self):
 		out=""
@@ -50,7 +50,7 @@ class MarkovModel:
 		node=self.begin.getRandomNext()
 		words=0
 		
-		while (node.text!=""):
+		while (node.data!=""):
 			if words>30:
 				text+=" [quote got too long]"
 				break;
@@ -58,7 +58,7 @@ class MarkovModel:
 			if words>0:
 				text+=" "
 				
-			text+=node.text
+			text+=node.data
 			node=node.getRandomNext()
 			words+=1
 		
@@ -66,14 +66,15 @@ class MarkovModel:
 
 if __name__=="__main__":
 	model=MarkovModel()
-	model.addList([["one", "two", "one", "three"]])
-	#model.addFile("../../DW_scraper/allDoctorQuotes.txt")
+	#model.addList([["one", "two", "one", "three", "one", "four"]])
+	model.addFile("../../DW_scraper/allDoctorQuotes.txt")
 	
-	print("\nmodel:\n"+model.getString())
+	#print("\nmodel:\n"+model.getString())
 	
 	print("randomly generated quote:\n")
 	
-	for i in range(0, 1):
+	for i in range(0, 12):
 		print(model.makeQuote())
+		print("")
 
 
