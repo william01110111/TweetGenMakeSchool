@@ -67,7 +67,7 @@ class MarkovModel:
 if __name__=="__main__":
 	model=MarkovModel()
 	#model.addList([["one", "two", "one", "three", "one", "four"]])
-	model.addFile("../../DW_scraper/allDoctorQuotes.txt")
+	model.addFile("../cleaned_corpus/allDoctorQuotes.txt")
 	
 	#print("\nmodel:\n"+model.getString())
 	

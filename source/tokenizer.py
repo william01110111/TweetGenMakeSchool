@@ -32,7 +32,7 @@ class Tokenizer():
 			if (c==" " or c=="," or c=="(" or c==")" or c=="[" or c=="]" or c==";" or c==":"):
 				self.finishToken()
 		
-			elif (c=="." or c=="\n" or c=="!" or c=="?"):
+			elif (c=="." or c=="\n" or c=="!" or c=="?" or c=='-'):
 				self.finishQuote()
 		
 			self.pos+=1
