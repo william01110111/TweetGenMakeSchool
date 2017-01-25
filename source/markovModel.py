@@ -28,7 +28,6 @@ class MarkovModel:
 			last.addNode(self.end)
 		
 		print("added "+str(tokens)+" tokens to model")
-		print("done adding file")
 	
 	def addFile(self, filepath):
 		print("reading from '"+filepath+"'...")

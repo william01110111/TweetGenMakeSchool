@@ -1,19 +1,16 @@
-from wordHistogram import Histogram
-from randomWordSelector import RandomWordSelector
+import source.markovModel
 import os
 
 from flask import Flask
 app = Flask(__name__)
 
-hist=Histogram()
-
-hist.addFile("trump_speach.txt")
-selector=RandomWordSelector(hist)
+model=source.markovModel.MarkovModel()
 
 @app.route('/')
 def welcome():
-	return "welcome to random word selector, go to /word to get a word"
+	return model.makeQuote()
 
+"""
 @app.route('/word')
 def getRandWord():
 	return selector.getRandWord()
@@ -26,8 +23,15 @@ def getManyWords(wordNum):
 		wordList.append(selector.getRandWord())
 	
 	return " ".join(wordList)
+"""
 
 if __name__ == "__main__":
+	model.addFile("cleaned_corpus/allDoctorQuotes.txt")
+	print("\n\n\nserver started\n\n\n")
 	port= int(os.environ.get("PORT", 5000))
+	# this to stop the app running twice
+	#app.run(debug=True, host='0.0.0.0', port=port, use_reloader=False)
+	
 	app.run(debug=True, host='0.0.0.0', port=port)
+	
 
